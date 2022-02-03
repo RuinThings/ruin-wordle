@@ -1,1 +1,143 @@
-Ruined.
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Ruin Wordle</title>
+    <style>
+        /* Global Styles & Colors */
+        :root {
+          --green: #6aaa64;
+          --darkendGreen: #538d4e;
+          --yellow: #c9b458;
+          --darkendYellow: #b59f3b;
+          --lightGray: #d8d8d8;
+          --gray: #86888a;
+          --darkGray: #939598;
+          --white: #fff;
+          --black: #212121;
+          /* Colorblind colors */
+          --orange: #f5793a;
+          --blue: #85c0f9;
+          font-family: 'Clear Sans', 'Helvetica Neue', Arial, sans-serif;
+          font-size: 16px;
+          --header-height: 50px;
+          --keyboard-height: 200px;
+          --game-max-width: 500px;
+        }
+        /* Dark Theme Colors */
+        .nightmode {
+          --color-tone-1: #d7dadc;
+          --color-tone-2: #818384;
+          --color-tone-3: #565758;
+          --color-tone-4: #3a3a3c;
+          --color-tone-5: #272729;
+          --color-tone-6: #1a1a1b;
+          --color-tone-7: #121213;
+          --opacity-50: rgba(0, 0, 0, 0.5);
+        }
+        /* Constant colors and colors derived from theme */
+        .nightmode {
+          --color-background: var(--color-tone-7);
+        }
+        .nightmode {
+          --color-present: var(--darkendYellow);
+          --color-correct: var(--darkendGreen);
+          --color-absent: var(--color-tone-4);
+          --tile-text-color: var(--color-tone-1);
+          --key-text-color: var(--color-tone-1);
+          --key-evaluated-text-color: var(--color-tone-1);
+          --key-bg: var(--color-tone-2);
+          --key-bg-present: var(--color-present);
+          --key-bg-correct: var(--color-correct);
+          --key-bg-absent: var(--color-absent);
+          --modal-content-bg: var(--color-tone-7);
+        }
+
+        .tile {
+            width: 100%;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2rem;
+            line-height: 2rem;
+            font-weight: bold;
+            vertical-align: middle;
+            box-sizing: border-box;
+            color: var(--tile-text-color);
+            text-transform: uppercase;
+            user-select: none;
+            background-color: var(--color-correct);
+        }
+        .tile::before {
+            content: '';
+            display: inline-block;
+            padding-bottom: 100%;
+        }
+        .row {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            grid-gap: 5px;
+        }
+        
+        #board {
+            display: grid;
+            grid-template-rows: repeat(6, 1fr);
+            grid-gap: 5px;
+            padding: 10px;
+            box-sizing: border-box;
+            width: 350px;
+            height: 420px;
+            margin: 0px auto;
+        }
+
+        html {
+          height: 100%;
+        }
+
+        .container {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+
+        .hide {
+            display: none;
+        }
+
+        body {
+          height: 100%;
+          background-color: var(--color-background);
+          margin: 0;
+          padding: 0;
+          color: #fff;
+          /* Prevent scrollbar appearing on page transition */
+          overflow-y: hidden;
+        }
+      </style>
+  </head>
+  <body class="nightmode">
+    <div class="container">
+        <h1>Ruin Wordle</h1>
+        <div id="answer">
+            <p>The answer for wordle <span id="wn">???</span> is:</p>
+            <div id="board">
+                <div class="row">
+                    <div class="tile" id="a1">?</div>
+                    <div class="tile" id="a2">?</div>
+                    <div class="tile" id="a3">?</div>
+                    <div class="tile" id="a4">?</div>
+                    <div class="tile" id="a5">?</div>
+                </div>
+            </div>
+        </div>
+        <div id="error" class="hide"></div>
+    </div>
+    <script src="index.js"></script>
+  </body>
+</html>
