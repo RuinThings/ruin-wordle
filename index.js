@@ -2337,6 +2337,7 @@ var words = [
   const a3 = document.querySelector("#a3");
   const a4 = document.querySelector("#a4");
   const a5 = document.querySelector("#a5");
+  const share = document.querySelector("#share");
 
   if (wordleNumber > words.length) {
     console.log("Wordle Number is too high!");
@@ -2345,6 +2346,10 @@ var words = [
     answer.classList.add("hide");
   } else {
     console.log("Wordle Number is valid!");
+
+    const shareText = `Wordle ${wordleNumber} 1/6\n\n🟩🟩🟩🟩🟩`
+    share.value = shareText;
+
     const wordle = words[wordleNumber].split("");
     console.log(`Wordle: ${wordle}`);
     wn.innerText = wordleNumber;
