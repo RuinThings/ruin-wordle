@@ -9,7 +9,7 @@ After discovering that wordle was a self contained app, I couldn't help but see 
 Turns out, it was incredibly easy
 
 ## How
-Wordle just uses a array of words, and it pulls the word by inded based off the current day.
+Wordle just uses a array of words, and it pulls the word by index based off the current day.
 
 In my code, this is done by calculating the unix epoch and then offsetting it by `18,797` days.
 
