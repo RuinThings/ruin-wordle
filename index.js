@@ -2358,7 +2358,7 @@ function generate() {
     for (let i = wordleNumber - 3; i <= wordleNumber + 3; i++) {
       options.push(`<option ${(i==wordleNumber)?"selected":""} value="${i}">${i}</option>`)
     }
-    wn.innerHTML = `<select onchange="location.hash=this.value; generate()">${options.join("")}</select>`
+    wn.innerHTML = `<select onchange="location.hash=this.value;">${options.join("")}</select>`
     a1.innerText = wordle[0]
     a2.innerText = wordle[1]
     a3.innerText = wordle[2]
@@ -2366,5 +2366,5 @@ function generate() {
     a5.innerText = wordle[4]
   }
 }
-
+window.onhashchange = generate;
 generate()
