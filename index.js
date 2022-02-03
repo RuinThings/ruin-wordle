@@ -2319,7 +2319,13 @@ var words = [
   // figure out the wordle of the day...
   const epoch = Math.floor(new Date()/8.64e7);
   const offset = 18797;
-  const wordleNumber = epoch - offset;
+  let wordleNumber = epoch - offset;
+
+  const hash = location.hash.substring(1);
+  // if hash is a number
+  if (hash.match(/^\d+$/)) {
+    wordleNumber = parseInt(hash);
+  }
 
   console.log(`Wordle Number: ${wordleNumber}`);
 
