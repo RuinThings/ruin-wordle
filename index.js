@@ -2316,6 +2316,7 @@ var words = [
     "shave",
   ];
 
+function generate() {
   // figure out the wordle of the day...
   const epoch = Math.floor(new Date()/8.64e7);
   const offset = 18797;
@@ -2352,10 +2353,18 @@ var words = [
 
     const wordle = words[wordleNumber].split("");
     console.log(`Wordle: ${wordle}`);
-    wn.innerText = wordleNumber;
+
+    const options = []
+    for (let i = wordleNumber - 3; i <= wordleNumber + 3; i++) {
+      options.push(`<option ${(i==wordleNumber)?"selected":""} value="${i}">${i}</option>`)
+    }
+    wn.innerHTML = `<select onchange="location.hash=this.value; generate()">${options.join("")}</select>`
     a1.innerText = wordle[0]
     a2.innerText = wordle[1]
     a3.innerText = wordle[2]
     a4.innerText = wordle[3]
     a5.innerText = wordle[4]
   }
+}
+
+generate()
