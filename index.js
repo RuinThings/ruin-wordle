@@ -2321,14 +2321,13 @@ function generate() {
   const epoch = Math.floor(new Date()/8.64e7);
   const offset = 18797;
   let wordleNumber = epoch - offset;
+  const maxWordleNumber = words.length - 1;
 
   const hash = location.hash.substring(1);
   // if hash is a number
   if (hash.match(/^\d+$/)) {
     wordleNumber = parseInt(hash);
   }
-
-  console.log(`Wordle Number: ${wordleNumber}`);
 
   const error = document.querySelector("#error");
   const answer = document.querySelector("#answer");
@@ -2340,31 +2339,44 @@ function generate() {
   const a5 = document.querySelector("#a5");
   const share = document.querySelector("#share");
 
-  if (wordleNumber > words.length) {
+  if (wordleNumber > maxWordleNumber) {
     console.log("Wordle Number is too high!");
-    error.innerHTML = "It looks like we have ran out of words to use.";
+    error.innerHTML = `There is no Wordle ${wordleNumber}.<br />Defaulting to the highest, Wordle ${maxWordleNumber}`;
     error.classList.remove("hide");
-    answer.classList.add("hide");
+    wordleNumber = maxWordleNumber
+  } else if (wordleNumber < 0) {
+    console.log("Wordle Number is too low!");
+    error.innerHTML = `There is no Wordle ${wordleNumber}.<br />Defaulting to the first, Wordle 0`;
+    error.classList.remove("hide");
+    wordleNumber = 0
   } else {
-    console.log("Wordle Number is valid!");
+    error.classList.add("hide");
+  }
 
-    const shareText = `Wordle ${wordleNumber} 1/6\n\n🟩🟩🟩🟩🟩`
-    share.value = shareText;
+  console.log(`Wordle Number: ${wordleNumber}`);
+  console.log(`Wordle Length: ${maxWordleNumber}`);
 
-    const wordle = words[wordleNumber].split("");
-    console.log(`Wordle: ${wordle}`);
+  console.log("Wordle Number is valid!");
 
-    const options = []
-    for (let i = wordleNumber - 3; i <= wordleNumber + 3; i++) {
+  const shareText = `Wordle ${wordleNumber} 1/6\n\n🟩🟩🟩🟩🟩`
+  share.value = shareText;
+
+  const wordle = words[wordleNumber].split("");
+  console.log(`Wordle: ${wordle}`);
+
+  const options = []
+  for (let i = wordleNumber - 3; i <= wordleNumber + 3; i++) {
+    if (i >= 0 && i <= maxWordleNumber) {
       options.push(`<option ${(i==wordleNumber)?"selected":""} value="${i}">${i}</option>`)
     }
-    wn.innerHTML = `<select onchange="location.hash=this.value;">${options.join("")}</select>`
-    a1.innerText = wordle[0]
-    a2.innerText = wordle[1]
-    a3.innerText = wordle[2]
-    a4.innerText = wordle[3]
-    a5.innerText = wordle[4]
   }
+  wn.innerHTML = `<select onchange="location.hash=this.value;">${options.join("")}</select>`
+  a1.innerText = wordle[0]
+  a2.innerText = wordle[1]
+  a3.innerText = wordle[2]
+  a4.innerText = wordle[3]
+  a5.innerText = wordle[4]
+  
 }
 window.onhashchange = generate;
 generate()
