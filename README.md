@@ -1,7 +1,7 @@
 # ruin-wordle
 A fun way to completely ruin the game
 
-https://applehat.github.io/ruin-wordle/
+https://ruinthings.github.io/ruin-wordle/
 
 ## Why
 After discovering that wordle was a self contained app, I couldn't help but see how hard it would be to build something like this.
