@@ -111,6 +111,22 @@
             text-align: center;
         }
 
+        a:link,
+        a:visited,
+        a:active {
+          color: #00acee;
+          text-decoration: none;
+        }
+
+        a:hover {
+          color: #00acee;
+          text-decoration: underline;
+        }
+
+        .twitter {
+          margin-top: -10px;
+        }
+
         #error{
           background: red;
           color: white;
@@ -147,6 +163,7 @@
   <body class="nightmode">
     <div class="container">
         <h1>Ruin Wordle</h1>
+        <span class="twitter"><a href="https://twitter.com/AtWordle">@AtWordle</a></span>
         <div id="answer">
             <p>The answer for wordle <span id="wn">???</span> is:</p>
             <div id="board">
